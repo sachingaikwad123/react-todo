@@ -9,6 +9,11 @@ const useTodos = () => {
     setTodos([todoItem, ...todos]);
   };
 
+  const deleteTodo = (id: string) => {
+    const updatedTodos = todos.filter((item) => item.id !== id);
+    setTodos(updatedTodos);
+  };
+
   const toggleTodo = (id: string) => {
     const updatedTodos = todos.map((item) => {
       if (item.id == id) {
@@ -19,7 +24,7 @@ const useTodos = () => {
     setTodos(updatedTodos);
   };
 
-  return { todos, addTodo, toggleTodo };
+  return { todos, addTodo, deleteTodo, toggleTodo };
 };
 
 export default useTodos;

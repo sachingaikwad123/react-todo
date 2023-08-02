@@ -6,7 +6,7 @@ import useTodos from "./hooks/useTodos";
 import "./Todo.css";
 
 const Todo = () => {
-  const { todos, addTodo, toggleTodo } = useTodos();
+  const { todos, addTodo, deleteTodo, toggleTodo } = useTodos();
 
   return (
     <>
@@ -15,14 +15,17 @@ const Todo = () => {
       <ul>
         {todos.map((item) => {
           return (
-            <li
-              className="todo-item"
-              key={item.id}
-              onClick={() => toggleTodo(item.id)}
-              data-completed={item.completed ? true : undefined}
-            >
-              {item.content}
-            </li>
+            <div className="todo-item" key={item.id}>
+              <span
+                onClick={() => toggleTodo(item.id)}
+                data-completed={item.completed ? true : undefined}
+              >
+                {item.content}
+              </span>
+              <button data-testid="delete" onClick={() => deleteTodo(item.id)}>
+                Delete
+              </button>
+            </div>
           );
         })}
       </ul>

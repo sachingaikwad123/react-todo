@@ -88,4 +88,23 @@ describe("Todo application tests", () => {
     // Assert
     expect(item).not.toHaveAttribute("data-completed");
   });
+
+  it("todo item disappears when delete button is clicked", async () => {
+    // Arrange.
+    render(<Todo />);
+    const inputElement = screen.getByRole("textbox");
+    act(() => {
+      userEvent.type(inputElement, "buy some milk");
+      userEvent.type(inputElement, "{enter}");
+    });
+
+    // Act.
+    const button = screen.getByTestId("delete");
+    act(() => {
+      userEvent.click(button);
+    });
+
+    // Assert
+    expect(screen.queryByText("buy some milk")).not.toBeInTheDocument();
+  });
 });
