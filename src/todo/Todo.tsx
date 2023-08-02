@@ -12,18 +12,20 @@ const Todo = () => {
     <>
       <h1>My Todo Application </h1>
       <TodoInput onItemAdded={addTodo}></TodoInput>
-      {todos.map((item) => {
-        return (
-          <div
-            className="todo-item"
-            key={item.id}
-            onClick={() => toggleTodo(item.id)}
-            data-completed={item.completed ? true : undefined}
-          >
-            {item.content}
-          </div>
-        );
-      })}
+      <ul>
+        {todos.map((item) => {
+          return (
+            <li
+              className="todo-item"
+              key={item.id}
+              onClick={() => toggleTodo(item.id)}
+              data-completed={item.completed ? true : undefined}
+            >
+              {item.content}
+            </li>
+          );
+        })}
+      </ul>
     </>
   );
 };
