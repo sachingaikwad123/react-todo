@@ -3,6 +3,7 @@ import { v4 as uuid } from "uuid";
 import { TodoItem } from "./TodoItem";
 import TodoInput from "./TodoInput";
 import useTodos from "./hooks/useTodos";
+import "./Todo.css";
 
 const Todo = () => {
   const { todos, addTodo, toggleTodo } = useTodos();
@@ -13,13 +14,14 @@ const Todo = () => {
       <TodoInput onItemAdded={addTodo}></TodoInput>
       {todos.map((item) => {
         return (
-          <li
+          <div
+            className="todo-item"
             key={item.id}
             onClick={() => toggleTodo(item.id)}
             data-completed={item.completed ? true : undefined}
           >
             {item.content}
-          </li>
+          </div>
         );
       })}
     </>
