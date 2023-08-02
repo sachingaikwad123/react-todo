@@ -4,6 +4,12 @@ import Todo from "./Todo";
 import userEvent from "@testing-library/user-event";
 
 describe("Todo application tests", () => {
+  it("renders App with title", () => {
+    render(<Todo />);
+    const linkElement = screen.getByText("My Todo Application");
+    expect(linkElement).toBeInTheDocument();
+  });
+
   it("Check if input box is rendered on the page", () => {
     // Arrange.
     render(<Todo />);

@@ -10,7 +10,7 @@ const Todo = () => {
 
   return (
     <>
-      <div>Todo</div>
+      <h1>My Todo Application </h1>
       <TodoInput onItemAdded={addTodo}></TodoInput>
       {todos.map((item) => {
         return (
