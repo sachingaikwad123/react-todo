@@ -1,24 +1,23 @@
 import React, { ChangeEvent, KeyboardEvent, useState } from "react";
 import { v4 as uuid } from "uuid";
 
-interface Item {
+type TodoItem = {
   id: string;
-  value: string;
-}
+  content: string;
+};
 
 const Todo = () => {
-  const [newTodo, setNewTodo] = useState<string>("");
-  const [todoList, setTodoList] = useState<Array<Item>>([]);
+  const [content, setContent] = useState<string>("");
+  const [todos, setTodos] = useState<TodoItem[]>([]);
 
   const handleChange = (e: ChangeEvent<HTMLInputElement>) => {
-    setNewTodo(e.target.value);
+    setContent(e.target.value);
   };
 
   const handleKeyDown = (e: KeyboardEvent<HTMLElement>) => {
     if (e.code == "Enter") {
-      let newItem: Item = { id: uuid(), value: newTodo };
-      let newTodoList: Array<Item> = [newItem].concat(todoList);
-      setTodoList(newTodoList);
+      const id = uuid();
+      setTodos([{ id, content }, ...todos]);
     }
   };
 
@@ -30,8 +29,8 @@ const Todo = () => {
         onChange={handleChange}
         onKeyDown={handleKeyDown}
       ></input>
-      {todoList.map((item) => {
-        return <li key={item.id}>{item.value}</li>;
+      {todos.map((item) => {
+        return <li key={item.id}>{item.content}</li>;
       })}
     </>
   );
