@@ -10,12 +10,30 @@ const Todo = () => {
     setTodos([todoItem, ...todos]);
   };
 
+  const handleClick = (id: string) => {
+    const updatedTodos = todos.map((item) => {
+      if (item.id == id) {
+        return { ...item, completed: !item.completed };
+      }
+      return item;
+    });
+    setTodos(updatedTodos);
+  };
+
   return (
     <>
       <div>Todo</div>
       <TodoInput onItemAdded={onItemAdded}></TodoInput>
       {todos.map((item) => {
-        return <li key={item.id}>{item.content}</li>;
+        return (
+          <li
+            key={item.id}
+            onClick={() => handleClick(item.id)}
+            data-completed={item.completed ? true : undefined}
+          >
+            {item.content}
+          </li>
+        );
       })}
     </>
   );

@@ -17,7 +17,7 @@ const TodoInput = (props: TodoInputProps) => {
   const handleKeyDown = (e: KeyboardEvent<HTMLElement>) => {
     if (e.code == "Enter") {
       const id = uuid();
-      onItemAdded({ id, content });
+      onItemAdded({ id, content, completed: false });
     }
   };
 
