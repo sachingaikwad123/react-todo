@@ -31,4 +31,55 @@ describe("Todo application tests", () => {
       expect(screen.getByText("buy some milk")).toBeInTheDocument();
     });
   });
+
+  it("mark an item as completed", async () => {
+    // Arrange.
+    render(<Todo />);
+
+    // Act.
+    const inputElement = screen.getByRole("textbox");
+    act(() => {
+      userEvent.type(inputElement, "buy some milk");
+      userEvent.type(inputElement, "{enter}");
+    });
+
+    const item = screen.getByText("buy some milk");
+    expect(item).toBeInTheDocument();
+
+    act(() => {
+      userEvent.click(item);
+    });
+
+    // Assert
+    expect(item).toHaveAttribute("data-completed", "true");
+  });
+
+  it("toggle active and completed of an item", async () => {
+    // Arrange.
+    render(<Todo />);
+
+    // Act.
+    const inputElement = screen.getByRole("textbox");
+    act(() => {
+      userEvent.type(inputElement, "buy some milk");
+      userEvent.type(inputElement, "{enter}");
+    });
+
+    const item = screen.getByText("buy some milk");
+    expect(item).toBeInTheDocument();
+
+    act(() => {
+      userEvent.click(item);
+    });
+
+    // Assert
+    expect(item).toHaveAttribute("data-completed", "true");
+
+    act(() => {
+      userEvent.click(item);
+    });
+
+    // Assert
+    expect(item).not.toHaveAttribute("data-completed");
+  });
 });
